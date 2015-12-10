@@ -6,6 +6,7 @@ class Box < Array
 
 		# 初始化模型
 		@box = []
+		@box_pre = []
 
 		4.downto(1) do |i|
 			@box << [0, 0, 0, 0]
@@ -30,6 +31,11 @@ class Box < Array
 			i, j = xyz.split(',').map(&:to_i)
 			@box[i][j] = 2
 		end
+
+	end
+
+	def get_box
+		@box
 	end
 
 	# 随机选择一个空白格子放入一个2或4(各占50%概率)
@@ -43,12 +49,16 @@ class Box < Array
 	def move_up
 		@xyzs_varialbal = []
 
+		box = @box.map do  |array|
+			array.clone
+		end
+
 		tag = [0, 0, 0, 0]
 		1.upto(3) do |i|
 			i.downto(1) do |j|
-				tag = merge(@box[j-1], @box[j], tag)
+				tag = merge(box[j-1], box[j], tag)
 				if i == 3
-					@box[j].each_with_index do |num, index|
+					box[j].each_with_index do |num, index|
 						unless num == 0
 							@xyzs_varialbal << "#{j},#{index}"
 						end
@@ -57,22 +67,24 @@ class Box < Array
 			end
 
 			if i == 3
-				@box[0].each_with_index do |num, index|
+				box[0].each_with_index do |num, index|
 					unless num == 0
 						@xyzs_varialbal << "#{0},#{index}"
 					end
 				end 
 			end
 		end
-		tag
 
+    box 
 	end
 
 	# 下移
 	def move_down
 		@xyzs_varialbal = []
 
-		box = @box.reverse
+		box = @box.reverse.map do  |array|
+			array.clone
+		end
 		tag = [0, 0, 0, 0]
 		1.upto(3) do |i|
 			i.downto(1) do |j|
@@ -94,15 +106,18 @@ class Box < Array
 				end 
 			end
 		end
-		@box = box.reverse
-		tag
+
+		box.reverse
+
 	end
 
 	# 右移
 	def move_right
 		@xyzs_varialbal = []
 
-		box = @box.transpose.reverse
+		box = @box.transpose.reverse.map do  |array|
+			array.clone
+		end
 		tag = [0, 0, 0, 0]
 		1.upto(3) do |i|
 			i.downto(1) do |j|
@@ -124,15 +139,17 @@ class Box < Array
 				end 
 			end
 		end
-		
-		@box = box.reverse.transpose
-		tag
+
+		box.reverse.transpose
+
 	end
 
 	def move_left
 		@xyzs_varialbal = []
 
-		box = @box.transpose
+		box = @box.transpose.map do  |array|
+			array.clone
+		end
 		tag = [0, 0, 0, 0]
 		1.upto(3) do |i|
 			i.downto(1) do |j|
@@ -154,10 +171,24 @@ class Box < Array
 				end 
 			end
 		end
-		
-		@box = box.transpose
-		tag
+
+		box.transpose
+
 	end
+
+	['up', 'down', 'left', 'right'].each do |val|
+    self.class_eval <<-EOF
+      def move_#{val}!
+        box = move_#{val}
+				if @box == box
+					return false
+				else
+					@box = box
+					return true
+				end
+      end
+    EOF
+  end
 
 	# 矩阵转置
 	def transpose
@@ -180,6 +211,16 @@ class Box < Array
 		format_array
 	end
 
+	def can_move?
+		move_statues = [1, 1, 1, 1] # [右, 下, 左, 上]
+		move_statues[0] = 0 if @box == move_right
+		move_statues[1] = 0 if @box == move_down
+		move_statues[2] = 0 if @box == move_left
+		move_statues[3] = 0 if @box == move_up
+
+		return move_statues.include?(1) ? move_statues : false
+	end
+
 	private 
 
 	# 按1024的规则合并两行数据，返回操作的标志 0表示未发生相加，1表示发生了相加
@@ -190,6 +231,7 @@ class Box < Array
 			when 0
 				a1[i] = a2[i]
 				a2[i] = 0
+
 			when a2[i]
 				if tag[i] == 0
 					a1[i] *= 2

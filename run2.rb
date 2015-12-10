@@ -5,6 +5,40 @@ box = Box.new
 puts 'I'
 puts box.format_put
 
+box.move_down!
+box.move_right!
+
+while box.can_move?
+  status = box.can_move?
+  moved = false
+  status.each_with_index do |statu, i|
+    if statu == 1 
+      case i 
+      when 0
+        moved = box.move_right!
+        puts 'R'
+        break
+      when 1
+        moved = box.move_down!
+        puts 'D'
+        break
+      when 2
+        moved = box.move_left!
+        puts 'L'
+        break
+      when 3
+        puts 'U'
+        moved = box.move_up!
+        break
+      end
+    else
+      next
+    end
+  end
+  box.add_2_or_4 if moved
+  puts box.format_put
+  p box.can_move?
+end
 # while true
 # 	c = read_char
 # 	case c
