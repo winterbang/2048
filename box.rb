@@ -15,7 +15,7 @@ class Box < Array
 		@xyzs = []
 		0.upto(3) do |i|
 			0.upto(3) do |j|
-				@xyzs << "#{i}, #{j}"
+				@xyzs << "#{i},#{j}"
 			end
 		end
 
@@ -32,8 +32,17 @@ class Box < Array
 		end
 	end
 
+	# 随机选择一个空白格子放入一个2或4(各占50%概率)
+	def add_2_or_4
+		sample_xyzs = @xyzs - @xyzs_varialbal
+		i, j = sample_xyzs.sample().split(',').map(&:to_i)
+		@box[i][j] = [2, 4].sample()
+	end
+
 	# 上移
 	def move_up
+		@xyzs_varialbal = []
+
 		tag = [0, 0, 0, 0]
 		1.upto(3) do |i|
 			i.downto(1) do |j|
@@ -45,21 +54,84 @@ class Box < Array
 						end
 					end 
 				end
+			end
 
+			if i == 3
+				@box[0].each_with_index do |num, index|
+					unless num == 0
+						@xyzs_varialbal << "#{0},#{index}"
+					end
+				end 
 			end
 		end
+		tag
+
 	end
 
 	# 下移
 	def move_down
+		@xyzs_varialbal = []
+
+		box = @box.reverse
+		tag = [0, 0, 0, 0]
+		1.upto(3) do |i|
+			i.downto(1) do |j|
+				tag = merge(box[j-1], box[j], tag)
+				if i == 3
+					box[j].each_with_index do |num, index|
+						unless num == 0
+							@xyzs_varialbal << "#{3-j},#{index}"
+						end
+					end 
+				end
+			end
+
+			if i == 3
+				box[0].each_with_index do |num, index|
+					unless num == 0
+						@xyzs_varialbal << "#{3},#{index}"
+					end
+				end 
+			end
+		end
+		@box = box.reverse
+		tag
 	end
 
 	# 右移
 	def move_right
+		@xyzs_varialbal = []
+
+		box = @box.transpose.reverse
+		tag = [0, 0, 0, 0]
+		1.upto(3) do |i|
+			i.downto(1) do |j|
+				tag = merge(box[j-1], box[j], tag)
+				if i == 3
+					box[j].each_with_index do |num, index|
+						unless num == 0
+							@xyzs_varialbal << "#{index},#{3-j}"
+						end
+					end 
+				end
+			end
+
+			if i == 3
+				box[0].each_with_index do |num, index|
+					unless num == 0
+						@xyzs_varialbal << "#{index},#{3}"
+					end
+				end 
+			end
+		end
 		
+		@box = box.reverse.transpose
+		tag
 	end
 
 	def move_left
+		@xyzs_varialbal = []
+
 		box = @box.transpose
 		tag = [0, 0, 0, 0]
 		1.upto(3) do |i|
@@ -68,13 +140,23 @@ class Box < Array
 				if i == 3
 					box[j].each_with_index do |num, index|
 						unless num == 0
-							@xyzs_varialbal << "#{j},#{index}"
+							@xyzs_varialbal << "#{index},#{j}"
 						end
 					end 
 				end
 			end
-			@box = box.transpose
+
+			if i == 3
+				box[0].each_with_index do |num, index|
+					unless num == 0
+						@xyzs_varialbal << "#{index},#{0}"
+					end
+				end 
+			end
 		end
+		
+		@box = box.transpose
+		tag
 	end
 
 	# 矩阵转置
