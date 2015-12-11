@@ -221,6 +221,11 @@ class Box < Array
 		return move_statues.include?(1) ? move_statues : false
 	end
 
+	def method_name
+		new_box = @box.flatten
+ 
+	end
+
 	private 
 
 	# 按1024的规则合并两行数据，返回操作的标志 0表示未发生相加，1表示发生了相加

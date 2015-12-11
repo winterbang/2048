@@ -5,8 +5,14 @@ box = Box.new
 puts 'I'
 puts box.format_put
 
-box.move_down!
+puts 'R'
 box.move_right!
+puts box.format_put
+
+puts 'D'
+box.move_down!
+puts box.format_put
+
 
 while box.can_move?
   status = box.can_move?
@@ -37,8 +43,11 @@ while box.can_move?
   end
   box.add_2_or_4 if moved
   puts box.format_put
-  p box.can_move?
 end
+puts 'E'
+
+
+
 # while true
 # 	c = read_char
 # 	case c

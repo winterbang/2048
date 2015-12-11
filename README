@@ -1,0 +1,22 @@
+1. Swipe left and right several times (optional). Start a new game, then swipe left and right rapidly. Continue until you have a couple rows of 2s, 4s, and 8s. This isn't necessary to win, but it usually puts you in a good position and gets you to your first larger tiles faster
+反复左移和右移几次（可选）。在游戏开始的时候，快速的左右来回移动。直到出现多行2，4，和8。当然这对赢得游戏并没有多大帮助，但这对你赢得游戏是个很好的开端，有助于更快得获得更大数字的方块
+
+2.Build a higher tile in a corner. Combine the early tiles into a 16 or 32, and put it in a corner. The goal of this method is to keep this tile in place for as long as possible, gradually building it higher and higher.[5]
+This strategy was used for the world speed record of 2048, which reached the final tile in 1 minute and 34 seconds
+把最大数字的方块固定在角落里。把最开始的几个方块合并成16或32，并且把最高的方块固定在角落。这样做的目的是尽可能的让它不动，然后合并出越来越高的数字。这个策略对快速合并出2048是非常有用的。
+
+3.Keep the row with the high tile filled. For instance, if your high-value corner is in the top right, fill the entire top row with tiles. Alternating the two directions toward the corner ("up" and "right" in this example) is a good way to achieve this. Once filled, you'll be able to move left and right as much as you like, without the high-value tile shifting from its corner.
+Keep an eye on this row, and refill gaps that appear whenever possible, without shifting the corner tile.
+保证某行的被大数字方块填满。例如，假如最高数字的方块在右上角，用方块填满最顶层的。交替移动两个方向靠近角落（在这个例子中是‘上’和‘右’）是个很不错的方法实现这个目标。一旦被填满，将有可能
+
+4.Focus on combining small tiles. For most of the game, it's much more important to make 8s, 16s, and 32s than it is to aim for a single larger number. Ideally, these mid-range tiles will gather near your chosen corner tile. This sets you up for chain reactions of several combinations, which will get you much further than focusing on building one single tile higher by itself.
+
+5.Maneuver around small, trapped tiles. Often, things won't work out perfectly, and you'll end up with a 2 or 4 trapped between a 256 and a 64, or similarly inconvenient positions. This is a good time to pause and think carefully about each move, and aim to free that small tile. There are a couple different tactics for this:
+Choose a tile next to the trapped tile, and plan on how to combine it. If it's a large tile, you may need to plan multiple moves ahead to do this. Once it's set up with an equal tile next to it, swipe so the tile you've been planning to combine is the one that moves.
+Alternatively, try to create a gap in the row with the small, trapped tile, then shift left and right until it is positioned over a tile it can combine with. This will not typically work well on a crowded board.
+
+6.Move your corner tile when forced to, then return it. In almost every game, you'll come to a point where you're forced to move your corner tile out of position.[7] Look ahead to see which of the available moves benefits you the most. Swipe that direction, then swipe immediately back to return the high-value tile to the corner.
+In some copycat versions of the game, you can make a move that does nothing, and a random tile will still appear. In this case, you theoretically never need to move your tile from the corner, but it still may be necessary if your screen is in danger of being filled.
+
+7.Keep trying until you win. You'll still need some luck to beat the game, so don't expect to win first time. If you're forced to move your corner tile, and an unfortunate new tile appears in that corner, your chance of success are much lower. You might still win if you can clear off five or six empty tiles, or if your highest tiles are 64 or 128.[8] If it's later in the game than that, there's usually no point in trying to get out of it.[9]
+
