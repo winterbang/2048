@@ -7,9 +7,12 @@ This strategy was used for the world speed record of 2048, which reached the fin
 
 3.Keep the row with the high tile filled. For instance, if your high-value corner is in the top right, fill the entire top row with tiles. Alternating the two directions toward the corner ("up" and "right" in this example) is a good way to achieve this. Once filled, you'll be able to move left and right as much as you like, without the high-value tile shifting from its corner.
 Keep an eye on this row, and refill gaps that appear whenever possible, without shifting the corner tile.
-保证某行的被大数字方块填满。例如，假如最高数字的方块在右上角，用方块填满最顶层的。交替移动两个方向靠近角落（在这个例子中是‘上’和‘右’）是个很不错的方法实现这个目标。一旦被填满，将有可能
+保证某行被大数字方块填满。例如，假如最大数字的方块在右上角，则用方块填满最顶层的。交替移动两个方向靠近角落（在这个例子中是‘上’和‘右’）是个很不错的方法实现这个目标。在最大数字方块没有从它的角落一开的情况下，一旦被填满，将有可能更多的左右移动。
+注意这行的变化，无论什么时候，只要出现缝隙，马上填补，保证角落的最大方块不被移开。
 
 4.Focus on combining small tiles. For most of the game, it's much more important to make 8s, 16s, and 32s than it is to aim for a single larger number. Ideally, these mid-range tiles will gather near your chosen corner tile. This sets you up for chain reactions of several combinations, which will get you much further than focusing on building one single tile higher by itself.
+注意合并小数字的方块。这个游戏的大多数时候，合并成8、16、32比一味的合并出大数字方块更重要。
+
 
 5.Maneuver around small, trapped tiles. Often, things won't work out perfectly, and you'll end up with a 2 or 4 trapped between a 256 and a 64, or similarly inconvenient positions. This is a good time to pause and think carefully about each move, and aim to free that small tile. There are a couple different tactics for this:
 Choose a tile next to the trapped tile, and plan on how to combine it. If it's a large tile, you may need to plan multiple moves ahead to do this. Once it's set up with an equal tile next to it, swipe so the tile you've been planning to combine is the one that moves.
